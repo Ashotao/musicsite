@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/.env" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/.idea/.gitignore" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/Api/AuthController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/Api/SongController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/MainController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Models/User.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2021_02_25_150952_create_songs_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/package.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/js/app.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/js/components/App.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/js/components/Auth.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/js/components/Main.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/js/components/Music.vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/js/components/index.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/welcome.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/routes/api.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/routes/web.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webpack.mix.js" charset="UTF-8" />
+  </component>
+</project>

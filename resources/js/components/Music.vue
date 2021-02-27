@@ -2,18 +2,17 @@
     <div>
         <p>Music</p>
         <div>
-            <a href="#" v-on:click="YTplayer.playVideo()">Play</a>
-        </div>
-        <div>
-            <a href="#" v-on:click="YTplayer.pauseVideo()">Pause</a>
+            <button v-on:click=""><</button>
+            <button v-on:click="">Play</button>
+            <button v-on:click="">></button>
+            <input type="range" min="0" max="100" step="1" value="50">
         </div>
         <div>
             <ul>
-                <li v-for="song in Songs" href="#" v-on:click="playSong(song.link)">{{ song.name }}</li>
+                <li v-for="song in Songs" v-on:click="playSong(song.link)">{{ song.name }}</li>
             </ul>
         </div>
-        <iframe muted="muted" id="sc_widget" width="100%" style="display:none"></iframe>
-        <div muted="muted" id="yt_widget" width="100%" style="display:none"></div>
+        <audio controls :src="currentSong" ref="audio"></audio>
     </div>
 </template>
 
@@ -21,74 +20,32 @@
 export default {
     data() {
         return {
-            SCplayer: null,
-            YTplayer: null,
-            YT: false,
             Songs: [],
+            currentSong: null,
         }
     },
     methods: {
-        timeoutF() {
-            if (this.YT == true) {
-                this.YTplayer.playVideo();
-            } else {
-                this.SCplayer.play();
-            };
-
-            this.SCplayer.setVolume(40);
-            this.YTplayer.setVolume(40);
-        },
-        createScripts() {
-            const script = document.createElement('SCRIPT');
-            script.setAttribute('src', `https://w.soundcloud.com/player/api.js`);
-            document.body.appendChild(script);
-
-            const script2 = document.createElement('SCRIPT');
-            script2.setAttribute('src', `https://www.youtube.com/iframe_api`);
-            document.body.appendChild(script2);
-        },
-        startScript() {
-            const iframe = document.querySelector('#sc_widget');
-            iframe.src = 'https://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/43315398';
-            this.SCplayer = SC.Widget(iframe);
-
-            this.YTplayer = new YT.Player('yt_widget', {
-                width: 0,
-                height: 0,
-                videoId: 'TxyDtZGRo6g',
-            });
-        },
         loadSongs() {
             axios.get('/api/songs')
-            .then((response) =>  {
-                this.Songs = response.data;
+                .then((response) =>  {
+                    this.Songs = response.data;
+                })
+                .catch( function (error) {
+                    console.log(error);
+                })
+        },
+        playSong($url) {
+            axios.get('/api/getsongurl/bHugxNlAbtM')
+            .then((response) => {
+                this.currentSong = response.data;
             })
-            .catch( function (error) {
+            .catch(function (error) {
                 console.log(error);
             })
-        },
-        playSong($link) {
-            if ($link.indexOf('http') !== -1) {
-                this.YT = false;
-            } else {
-                this.YT = true;
-            };
-
-            if (this.YT == true) {
-                this.YTplayer.loadVideoById($link);
-                this.SCplayer.pause();
-            } else {
-                this.SCplayer.load($link);
-                this.YTplayer.pauseVideo();
-            };
-
-            setTimeout(this.timeoutF, 1500);
         }
     },
     mounted() {
-        this.createScripts();
         this.loadSongs();
-        setTimeout(this.startScript, 500);
     }
 }
 </script>

@@ -20,4 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('songs', 'Api\SongController@index');
+Route::get('getsongurl/{link}', 'Api\SongController@getVideoInfo');
 

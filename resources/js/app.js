@@ -8,7 +8,8 @@ Vue.use(Vuelidate);
 
 import App from './components/App.vue';
 import Main from './components/Main.vue';
-import Auth from './components/Auth.vue';
+import Login from './components/Login.vue';
+import Register from './components/Register.vue';
 import Music from './components/Music.vue';
 
 
@@ -21,9 +22,14 @@ const router = new VueRouter({
             component: Main
         },
         {
-            path: '/auth',
-            name: 'auth',
-            component: Auth,
+            path: '/auth/login',
+            name: 'login',
+            component: Login,
+        },
+        {
+            path: '/auth/register',
+            name: 'register',
+            component: Register,
         },
         {
             path: '/music',

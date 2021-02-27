@@ -12,8 +12,8 @@
                 <li v-for="song in Songs" href="#" v-on:click="playSong(song.link)">{{ song.name }}</li>
             </ul>
         </div>
-        <iframe id="sc_widget" width="100%" style="display:none"></iframe>
-        <div id="yt_widget" width="100%" style="display:none"></div>
+        <iframe muted="muted" id="sc_widget" width="100%" style="display:none"></iframe>
+        <div muted="muted" id="yt_widget" width="100%" style="display:none"></div>
     </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
             SCplayer: null,
             YTplayer: null,
             YT: false,
-            Songs: []
+            Songs: [],
         }
     },
     methods: {

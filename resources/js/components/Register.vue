@@ -1,10 +1,7 @@
 <template>
     <div>
-        <p>Auth page</p>
-        <pre>
-
-        </pre>
-        <form method="post" action="/api/auth/register">
+        <form method="post" action="/auth/register">
+            <input type="hidden" name="_token" :value="csrf">
             <div>
                 <label for="nickname">Nickname</label>
                 <input @blur="$v.form.login.$touch()" v-model="form.nickname" type="text" placeholder="text here..." id="nickname" name="nickname">
@@ -37,69 +34,56 @@
             <p>* - поля обязательные для заполнения</p>
             <button type="submit" :disabled="!isFormValidated()">Регистрация</button>
         </form>
-
-
-        <form method="post" action="/api/auth/login">
-            <div>
-                <label for="login1">login</label>
-                <input type="text" placeholder="text here..." id="login1" name="login">
-            </div>
-            <div>
-                <label for="password1">password</label>
-                <input type="password" placeholder="text here..." id="password1" name="password">
-            </div>
-            <button type="submit">Вход</button>
-        </form>
     </div>
 </template>
 
 <script>
-    import { required, maxLength, sameAs, minLength, email } from 'vuelidate/lib/validators'
+import { required, maxLength, sameAs, minLength, email } from 'vuelidate/lib/validators'
 
-    export default {
-        methods: {
-            isFormValidated() {
-                if (this.$v.$invalid === true) {
-                    return false;
-                } else {
-                    return true;
-                }
+export default {
+    methods: {
+        isFormValidated() {
+            if (this.$v.$invalid === true) {
+                return false;
+            } else {
+                return true;
             }
-        },
-        data() {
-            return {
-                asd: [],
-                form: {
-                    nickname: '',
-                    login: '',
-                    email: '',
-                    password: '',
-                    confirm_password: ''
-                }
-            }
-        },
-        validations: {
+        }
+    },
+    data() {
+        return {
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             form: {
-                nickname: {
-                    maxLength: maxLength(25)
-                },
-                login: {
-                    required,
-                    minLength: minLength(3)
-                },
-                email: {
-                    required,
-                    email
-                },
-                password: {
-                    required,
-                    minLength: minLength(6)
-                },
-                confirm_password: {
-                    required,
-                    sameAsPass: sameAs('password')
-                }
+                nickname: '',
+                login: '',
+                email: '',
+                password: '',
+                confirm_password: ''
             }
-        },
-    }
+        }
+    },
+    validations: {
+        form: {
+            nickname: {
+                maxLength: maxLength(25)
+            },
+            login: {
+                required,
+                minLength: minLength(3)
+            },
+            email: {
+                required,
+                email
+            },
+            password: {
+                required,
+                minLength: minLength(6)
+            },
+            confirm_password: {
+                required,
+                sameAsPass: sameAs('password')
+            }
+        }
+    },
+}
 </script>

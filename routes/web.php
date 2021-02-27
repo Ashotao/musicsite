@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//Route::view('/','welcome');
+Route::post('/auth/register', 'Auth\RegisterController@register');
+Route::post('/auth/login', 'Auth\LoginController@login');
+Route::get('/auth/logout', 'Auth\LoginController@logout');
 
 Route::get('/{any}', 'MainController@index')->where('any', '.*');

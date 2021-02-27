@@ -1,11 +1,13 @@
 <template>
     <div>
             <h1>Pamoika App</h1>
-
+        {{ user }}
         <p>
-                <router-link :to="{ name: 'home' }">Home</router-link> |
-                <router-link :to="{ name: 'auth' }">Auth</router-link> |
-                <router-link :to="{ name: 'music' }">Music</router-link>
+            <router-link :to="{ name: 'home' }">Home |</router-link>
+            <router-link v-if="user" :to="{ name: 'music' }">Music |</router-link>
+            <a v-if="user" href="/auth/logout">Logout |</a>
+            <router-link v-if="!user" :to="{ name: 'login' }">Login |</router-link>
+            <router-link v-if="!user" :to="{ name: 'register' }">Register |</router-link>
         </p>
 
         <div class="container">
@@ -14,5 +16,7 @@
     </div>
 </template>
 <script>
-export default {}
+export default {
+    props: ['user']
+}
 </script>

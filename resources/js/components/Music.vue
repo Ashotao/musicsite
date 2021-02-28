@@ -1,6 +1,8 @@
 <template>
     <div>
         <p>Music</p>
+        <Popup v-if="ShowPopUp == true" @closePopUp="addSong()"/>
+        <button v-on:click="addSong()">Добавить песню</button>
         <div>
             <a href="#" v-on:click="YTplayer.playVideo()">Play</a>
         </div>
@@ -18,13 +20,17 @@
 </template>
 
 <script>
+import Popup from "./Popup";
+
 export default {
+    components: {Popup},
     data() {
         return {
             SCplayer: null,
             YTplayer: null,
             YT: false,
             Songs: [],
+            ShowPopUp: false
         }
     },
     methods: {
@@ -61,7 +67,7 @@ export default {
         loadSongs() {
             axios.get('/api/songs')
             .then((response) =>  {
-                this.Songs = response.data;
+                this.Songs = response.data.songs;
             })
             .catch( function (error) {
                 console.log(error);
@@ -83,6 +89,12 @@ export default {
             };
 
             setTimeout(this.timeoutF, 1500);
+        },
+        addSong() {
+           if (this.ShowPopUp == true)
+               this.ShowPopUp = false;
+           else
+               this.ShowPopUp = true
         }
     },
     mounted() {

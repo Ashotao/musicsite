@@ -14,14 +14,16 @@ class SongController extends Controller
       return User::with('songs')->find(auth()->user()->id);
     }
 
-    public function addSong()
+    public function create()
     {
         Song::create([
             'link' => request()->link,
-            'name' => 'test',
+            'name' => request()->name,
             'lenght' => 333,
         ])->users()->attach(auth()->user()->id);
 
         return redirect('/music');
     }
+
+
 }

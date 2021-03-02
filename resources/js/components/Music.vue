@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>Music</p>
+        <p>Music list</p>
         <Popup v-if="ShowPopUp == true" @closePopUp="addSong()"/>
         <button v-on:click="addSong()">Добавить песню</button>
         <div>

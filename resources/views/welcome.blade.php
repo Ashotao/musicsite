@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Pamoika</title>
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/svg.css">
+    <link rel="stylesheet" href="/css/normalize.css">
 </head>
 <body>
 <div id="app">

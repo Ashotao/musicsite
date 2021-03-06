@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css?family=Arimo');
+
+body {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/images/background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Top menu */
+.top-menu {
+    position: relative;
+    background: rgba(29, 29, 29, .3);
+}
+.menu-main {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.menu-main:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.left-item {float: left;}
+.right-item {float: right;}
+.navbar-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.menu-main a,svg {
+    text-decoration: none;
+    display: block;
+    line-height: 80px;
+    padding: 0 20px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-family: 'Arimo', sans-serif;
+    font-weight: bold;
+    color: #e8e8e8;
+    transition: .3s linear;
+}
+.menu-main a:hover {background: rgba(0,0,0,.3);}
+@media (max-width: 830px) {
+    .menu-main {
+        padding-top: 90px;
+        text-align: center;
+    }
+    .navbar-logo {
+        position: absolute;
+        left: 50%;
+        top: 10px;
+        transform: translateX(-50%);
+    }
+    .menu-main li {
+        float: none;
+        display: inline-block;
+    }
+    .menu-main a {
+        line-height: normal;
+        padding: 20px 15px;
+        font-size: 16px;
+    }
+}
+
+/* Forms */
+.form {
+    position: absolute;
+    top: 51%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, .7);
+}
+.form h1 {
+    margin: 30px 100px;
+    padding: 0;
+    text-align: center;
+    color: #e8e8e8;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-family: 'Arimo', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.input-form {
+    margin: 15px 40px;
+    text-align: center;
+}
+.input-form input {
+    padding: 10px;
+    width: 100%;
+    color: #e8e8e8;
+    font-size: 15px;
+    font-family: 'Arimo', sans-serif;
+    background: none;
+    outline: none;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}
+.input-form input[type="text"]:focus, .input-form input[type="password"]:focus {
+    border: 1px solid rgba(255,116,255,0.5);
+}
+.input-form input[type="submit"] {
+    margin-top: 20px;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    background: rgba(255,116,255,0.5);
+    transition: .3s;
+}
+.input-form input[type="submit"]:hover {
+    background: rgba(255,116,255,.8);
+    cursor: pointer;
+}
+.error {
+    font-size: 13px;
+    font-family: 'Arimo', sans-serif;
+    color: #e09797;
+    text-align: left;
+    margin-top: 3px;
+}
+.error-input {
+    border: 1px solid #e09797 !important;
+}
+
+/* Song list */
+.song-main {
+    position: absolute;
+    top:25%;
+    left:50%;
+    transform: translate(-50%);
+    background: rgba(0, 0, 0, .7);
+    min-width: 581px;
+    min-height: 182px;
+    max-width: 581px;
+}
+.song-menu {
+    list-style: none;
+    font-size:0;
+    padding: 0px;
+}
+.song-menu li {
+    text-align: center;
+    display:inline-block;
+    width:49.6%;
+    padding:25px 0px;
+    cursor: pointer;
+}
+.song-main a {
+    color: #e8e8e8;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-family: 'Arimo', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.song-list {
+    margin: 20px 0px;
+    padding: 0px;
+}
+.song-item {
+    margin: 5px 40px;
+    width: 100%;
+    color: #e8e8e8;
+    font-size: 15px;
+    font-family: 'Arimo', sans-serif;
+    background: none;
+    outline: none;
+    box-sizing: border-box;
+    list-style: none;
+}
+/* Active */
+.activeMenu {
+    background: rgba(0, 0, 0, .35);
+
+}
+.activeTop {
+    background: rgba(0, 0, 0, .3);
+}
+.activeTop a path {
+    stroke: rgba(255,116,255,0.5);
+    fill: rgba(255,116,255,0.5);
+}
+
+input::-webkit-input-placeholder {
+    color: #b6b6b6;
+}
+input::-moz-placeholder {
+    color: #b6b6b6;
+}
+
+.player {
+    position: fixed;
+    top:14.1%;
+    left:50%;
+    transform: translate(-50%);
+    background: rgba(0, 0, 0, .7);
+    margin: 0;
+    padding: 0;
+}
+.player li{
+    float:left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.player svg {
+    height: 61px;
+    padding: 7px;
+    cursor: pointer;
+}
+.player span {
+    margin: auto;
+}
+

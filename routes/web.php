@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/auth/register', 'Auth\RegisterController@register');
 Route::post('/auth/login', 'Auth\LoginController@login');
-Route::post('/addsong', 'Api\SongController@addSong');
+Route::post('/addsong', 'Api\SongController@create');
 
 Route::get('/auth/logout', 'Auth\LoginController@logout');
 Route::get('/', 'MainController@index');

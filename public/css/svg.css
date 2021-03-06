@@ -1,0 +1,143 @@
+.menu-icon svg {
+    height: 61px;
+    padding: 7px;
+}
+.menu-icon path {
+    fill: transparent;
+    stroke: #fff;
+}
+.icon-logout .menu-icon path {
+    stroke-dasharray: 483;
+    stroke-dashoffset: 0;
+    stroke-width: 1.8;
+}
+.icon-logout .menu-icon:hover path {
+    animation: logout 1.5s linear forwards;
+}
+.icon-home .menu-icon path {
+    stroke-dasharray: 68;
+    stroke-dashoffset: 0;
+    stroke-width: 0.4;
+}
+.icon-home .menu-icon:hover path {
+    animation: home 1.5s linear forwards;
+}
+.icon-music .menu-icon path {
+    stroke-dasharray: 110;
+    stroke-dashoffset: 0;
+    stroke-width: 0.5;
+}
+.icon-music .menu-icon:hover path {
+    animation: music 1.5s linear forwards;
+}
+.icon-login .menu-icon path {
+    stroke-dasharray: 43;
+    stroke-dashoffset: 0;
+    stroke-width: 0.3;
+}
+.icon-login .menu-icon:hover path {
+    animation: login 1.5s linear forwards;
+}
+.icon-register .menu-icon path {
+    stroke-dasharray: 44;
+    stroke-dashoffset: 0;
+    stroke-width: 0.44;
+}
+.icon-register .menu-icon:hover path {
+    animation: register 1.5s linear forwards;
+}
+
+@keyframes logout {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    40% {
+        stroke-dashoffset: 483;
+        stroke: #f230ec;
+    }
+    80% {
+        stroke-dashoffset: 966;
+        fill: transparent;
+    }
+    100% {
+        stroke-dashoffset: 966;
+        stroke: rgba(255,116,255,0.5);
+        fill: rgba(255,116,255,0.5);
+    }
+}
+
+@keyframes home {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    40% {
+        stroke-dashoffset: 68;
+        stroke: #f230ec;
+    }
+    80% {
+        stroke-dashoffset: 136;
+        fill: transparent;
+    }
+    100% {
+        stroke-dashoffset: 136;
+        stroke: rgba(255,116,255,0.5);
+        fill: rgba(255,116,255,0.5);
+    }
+}
+
+@keyframes music {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    40% {
+        stroke-dashoffset: 110;
+        stroke: #f230ec;
+    }
+    80% {
+        stroke-dashoffset: 220;
+        fill: transparent;
+    }
+    100% {
+        stroke-dashoffset: 220;
+        stroke: rgba(255,116,255,0.5);
+        fill: rgba(255,116,255,0.5);
+    }
+}
+
+@keyframes login {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    40% {
+        stroke-dashoffset: 43;
+        stroke: #f230ec;
+    }
+    80% {
+        stroke-dashoffset: 86;
+        fill: transparent;
+    }
+    100% {
+        stroke-dashoffset: 86;
+        stroke: rgba(255,116,255,0.5);
+        fill: rgba(255,116,255,0.5);
+    }
+}
+
+@keyframes register {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    40% {
+        stroke-dashoffset: 44;
+        stroke: #f230ec;
+    }
+    80% {
+        stroke-dashoffset: 88;
+        fill: transparent;
+    }
+    100% {
+        stroke-dashoffset: 88;
+        stroke: rgba(255,116,255,0.5);
+        fill: rgba(255,116,255,0.5);
+    }
+}

@@ -1,38 +1,45 @@
 <template>
     <div>
-        <form method="post" action="/auth/register">
+        <form class="form" method="post" action="/auth/register">
+            <h1>Registration</h1>
             <input type="hidden" name="_token" :value="csrf">
-            <div>
-                <label for="nickname">Nickname</label>
-                <input @blur="$v.form.login.$touch()" v-model="form.nickname" type="text" placeholder="text here..." id="nickname" name="nickname">
-                <div class="error" v-if="!$v.form.nickname.maxLength">Никнейм не должен быть больше 25 символов</div>
+            <div class="input-form">
+                <input :class="{'error-input': !$v.form.nickname.maxLength}"
+                       @blur="$v.form.nickname.$touch()" v-model="form.nickname"
+                       type="text" placeholder="Nickname" id="nickname" name="nickname">
+                <div class="error" v-if="!$v.form.nickname.maxLength">Nickname is too long (maximum is 25 characters).</div>
             </div>
-            <div>
-                <label for="login">Login*</label>
-                <input @blur="$v.form.login.$touch()" v-model="form.login" type="text" placeholder="text here..." id="login" name="login">
-                <div class="error" v-if="$v.form.login.$dirty && !$v.form.login.required ">Это обязательное поле</div>
-                <div class="error" v-if="!$v.form.login.minLength">Логин не должен быть меньше 3 символов</div>
+            <div class="input-form">
+                <input :class="{ 'error-input': ($v.form.login.$dirty && !$v.form.login.required) || !$v.form.login.minLength}"
+                       @blur="$v.form.login.$touch()" v-model="form.login"
+                       type="text" placeholder="Login" id="login" name="login">
+                <div class="error" v-if="$v.form.login.$dirty && !$v.form.login.required">Required field</div>
+                <div class="error" v-if="!$v.form.login.minLength">Login must be at least 3 characters</div>
             </div>
-            <div>
-                <label for="email">E-mail*</label>
-                <input @blur="$v.form.email.$touch()" v-model="form.email" type="text" placeholder="text here..." id="email" name="email">
-                <div class="error" v-if="$v.form.email.$dirty && !$v.form.email.required">Это обязательное поле</div>
-                <div class="error" v-if="!$v.form.email.email">Введите корректную почту</div>
+            <div class="input-form">
+                <input :class="{ 'error-input': ($v.form.email.$dirty && !$v.form.email.required) || !$v.form.email.email}"
+                       @blur="$v.form.email.$touch()" v-model="form.email"
+                       type="text" placeholder="E-mail" id="email" name="email">
+                <div class="error" v-if="$v.form.email.$dirty && !$v.form.email.required">Required field</div>
+                <div class="error" v-if="!$v.form.email.email">Email is invalid</div>
             </div>
-            <div>
-                <label for="password">Password*</label>
-                <input @blur="$v.form.password.$touch()" v-model="form.password" type="password" placeholder="text here..." id="password" name="password">
-                <div class="error" v-if="$v.form.password.$dirty && !$v.form.password.required">Это обязательное поле</div>
-                <div class="error" v-if="!$v.form.password.minLength">Пароль не должен быть меньше 6 символов</div>
+            <div class="input-form">
+                <input :class="{ 'error-input': ($v.form.password.$dirty && !$v.form.password.required) || !$v.form.password.minLength}"
+                       @blur="$v.form.password.$touch()" v-model="form.password"
+                       type="password" placeholder="Password" id="password" name="password">
+                <div class="error" v-if="$v.form.password.$dirty && !$v.form.password.required">Required field</div>
+                <div class="error" v-if="!$v.form.password.minLength">Password must be at least 3 characters</div>
             </div>
-            <div>
-                <label for="confirm_password">Confirm password*</label>
-                <input @blur="$v.form.confirm_password.$touch()" v-model="form.confirm_password" type="password" placeholder="text here..." id="confirm_password" name="confirm_password">
-                <div class="error" v-if="$v.form.confirm_password.$dirty && !$v.form.password.required">Это обязательное поле</div>
-                <div class="error" v-if="$v.form.confirm_password.$dirty && !$v.form.confirm_password.sameAsPass">Пароли должны совпадать</div>
+            <div class="input-form">
+                <input :class="{ 'error-input': ($v.form.confirm_password.$dirty && !$v.form.password.required) || ($v.form.confirm_password.$dirty && !$v.form.confirm_password.sameAsPass)}"
+                       @blur="$v.form.confirm_password.$touch()" v-model="form.confirm_password"
+                       type="password" placeholder="Confirm password" id="confirm_password" name="confirm_password">
+                <div class="error" v-if="$v.form.confirm_password.$dirty && !$v.form.password.required">Required field</div>
+                <div class="error" v-if="$v.form.confirm_password.$dirty && !$v.form.confirm_password.sameAsPass">The password and confirm password fields do not match</div>
             </div>
-            <p>* - поля обязательные для заполнения</p>
-            <button type="submit" :disabled="!isFormValidated()">Регистрация</button>
+            <div class="input-form">
+                <input :disabled="!isFormValidated()" type="submit" value="Register">
+            </div>
         </form>
     </div>
 </template>

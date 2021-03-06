@@ -1,20 +1,25 @@
 <template>
     <div>
-        <form method="post" action="/auth/login">
+        <form class="form" method="post" action="/auth/login">
+            <h1>Authorization</h1>
             <input type="hidden" name="_token" :value="csrf">
-            <div>
-                <label for="login">login</label>
-                <input @blur="$v.form.login.$touch()" v-model="form.login" type="text" placeholder="text here..." id="login" name="login">
-                <div class="error" v-if="$v.form.login.$dirty && !$v.form.login.required ">Это обязательное поле</div>
-                <div class="error" v-if="!$v.form.login.minLength">Логин не должен быть меньше 3 символов</div>
+            <div class="input-form">
+                <input :class="{ 'error-input': ($v.form.login.$dirty && !$v.form.login.required) || !$v.form.login.minLength}"
+                       @blur="$v.form.login.$touch()" v-model="form.login"
+                       type="text" placeholder="Login" id="login" name="login">
+                <div class="error" v-if="$v.form.login.$dirty && !$v.form.login.required">Required field</div>
+                <div class="error" v-if="!$v.form.login.minLength">Login must be at least 3 characters</div>
             </div>
-            <div>
-                <label for="password">password</label>
-                <input @blur="$v.form.password.$touch()" v-model="form.password" type="password" placeholder="text here..." id="password" name="password">
-                <div class="error" v-if="$v.form.password.$dirty && !$v.form.password.required">Это обязательное поле</div>
-                <div class="error" v-if="!$v.form.password.minLength">Пароль не должен быть меньше 6 символов</div>
+            <div class="input-form">
+                <input :class="{ 'error-input': ($v.form.password.$dirty && !$v.form.password.required) || !$v.form.password.minLength}"
+                       @blur="$v.form.password.$touch()" v-model="form.password"
+                       type="password" placeholder="Password" id="password" name="password">
+                <div class="error" v-if="$v.form.password.$dirty && !$v.form.password.required">Required field</div>
+                <div class="error" v-if="!$v.form.password.minLength">Password must be at least 6 characters</div>
             </div>
-            <button :disabled="!isFormValidated()" type="submit">Вход</button>
+            <div class="input-form">
+                <input :disabled="!isFormValidated()" type="submit" value="Sign in">
+            </div>
         </form>
     </div>
 </template>

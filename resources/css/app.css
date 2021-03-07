@@ -172,6 +172,7 @@ body {
     outline: none;
     box-sizing: border-box;
     list-style: none;
+    cursor: pointer;
 }
 /* Active */
 .activeMenu {
@@ -213,7 +214,7 @@ input::-moz-placeholder {
     padding: 7px;
     cursor: pointer;
 }
-.player span {
-    margin: auto;
-}
 
+#YT, #SC{
+    display: none;
+}

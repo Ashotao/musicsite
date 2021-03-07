@@ -213,9 +213,6 @@ input::-moz-placeholder {
     padding: 7px;
     cursor: pointer;
 }
-.player span {
-    margin: auto;
-}
 
 #YT, #SC{
     display: none;

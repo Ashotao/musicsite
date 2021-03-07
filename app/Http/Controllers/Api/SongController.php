@@ -12,14 +12,22 @@ class SongController extends Controller
 {
     public function index()
     {
-        return User::find(auth()->user()->id)->songs;
+       return User::find(auth()->user()->id)->songs()->orderBy('id', 'DESC')->paginate(20);
     }
 
     public function create(Request $request)
     {
         $validated = $this->validate($request, ['link' => new CorrectLink(), 'name' => 'required|max:50']);
+
+        preg_match('/[\?\&]v=([^\&]*)/', request()->link, $ok);
+        if(!empty($ok[1])){
+            $link = trim($ok[1]);
+        } else {
+            $link = request()->link;
+        }
+
         Song::create([
-            'link' => request()->link,
+            'link' => $link,
             'name' => request()->name,
             'lenght' => 333,
         ])->users()->attach(auth()->user()->id);

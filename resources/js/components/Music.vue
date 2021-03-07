@@ -5,7 +5,6 @@
             <li v-on:click="playSong()"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g><path d="M144,124.9L353.8,256L144,387.1V124.9 M128,96v320l256-160L128,96L128,96z"/></g></svg></li>
             <li><svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><path d="M76.8,217.6c0-1.637,0.625-3.274,1.875-4.524L163.75,128L78.675,42.925c-2.5-2.5-2.5-6.55,0-9.05s6.55-2.5,9.05,0  l89.601,89.6c2.5,2.5,2.5,6.551,0,9.051l-89.601,89.6c-2.5,2.5-6.55,2.5-9.05,0C77.425,220.875,76.8,219.237,76.8,217.6z"/></svg></li>
             <input v-model="currentVolume" v-on:input="setVolume(currentVolume)" type="range" min="0" max="100" step="1">
-            <input type="range" min="0" max="100" step="1">
         </ul>
         <div class="song-main">
             <ul class="song-menu">
@@ -28,9 +27,14 @@
                     </div>
                 </form>
             </div>
-            <ul v-else class="song-list">
-                <li class="song-item" v-for="song in Songs" v-on:click="setSong(song.link)">{{ song.name }}</li>
-            </ul>
+            <div v-else>
+                <ul class="song-list">
+                    <li class="song-item" v-for="song in Songs" v-on:click="setSong(song.link)">{{ song.name }}</li>
+                </ul>
+                <div v-if="!lastpage" class="input-form">
+                    <input v-on:click="loadSongs" type="submit" value="More">
+                </div>
+            </div>
         </div>
         <div id="YT"></div>
         <iframe id="SC" allow="autoplay"
@@ -50,15 +54,21 @@ export default {
             Paused: false,
             currentVolume: 50,
             Songs: [],
+            lastpage: true,
+            currentPage: 1,
             ShowPopUp: false,
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }
     },
     methods: {
         loadSongs() {
-            axios.get('/api/songs')
+            axios.get('/api/songs?page=' + this.currentPage)
             .then((response) =>  {
-                this.Songs = response.data;
+                var Songs = [];
+                [].push.apply(Songs, response.data.data);
+                (response.data.current_page == response.data.last_page) ? this.lastpage = true : this.lastpage = false;
+                this.currentPage += 1;
+                this.Songs = Songs;
             })
             .catch( function (error) {
                 console.log(error);
@@ -121,14 +131,12 @@ export default {
         }
     },
     mounted() {
-        this.createScripts();
-        this.loadSongs();
-        setTimeout(()=> { this.startScripts() },1000);
-        this.SCPlayer.setVolume(this.currentVolume);
-        this.YTPlayer.setVolume(this.currentVolume);
         if (this.errors.link || this.errors.name) {
             this.ShowPopUp = true;
         }
+        this.createScripts();
+        this.loadSongs();
+        setTimeout(()=> { this.startScripts() },1000);
     },
 
 }

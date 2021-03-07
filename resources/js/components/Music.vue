@@ -15,10 +15,12 @@
                 <form method="post" action="/addsong">
                     <input type="hidden" name="_token" :value="csrf">
                     <div class="input-form">
-                        <input type="text" placeholder="Ссылка на youtube/soundcloud" name="link">
+                        <input :class="{'error-input': errors.link}" type="text" placeholder="Ссылка на youtube/soundcloud" name="link">
+                        <div class="error" v-if="errors.link">{{ errors.link[0] }}</div>
                     </div>
                     <div class="input-form">
-                        <input type="text" placeholder="Название трека" name="name">
+                        <input :class="{'error-input': errors.name}" type="text" placeholder="Название трека" name="name">
+                        <div class="error" v-if="errors.name">{{ errors.name[0] }}</div>
                     </div>
                     <div class="input-form">
                         <input type="submit" value="Add">
@@ -37,6 +39,7 @@
 
 <script>
 export default {
+    props: ['errors'],
     data() {
         return {
             SCplayer: null,
@@ -81,7 +84,7 @@ export default {
         loadSongs() {
             axios.get('/api/songs')
             .then((response) =>  {
-                this.Songs = response.data.songs;
+                this.Songs = response.data;
             })
             .catch( function (error) {
                 console.log(error);
@@ -115,6 +118,9 @@ export default {
         this.createScripts();
         this.loadSongs();
         setTimeout(this.startScript, 500);
+        if (this.errors.link || this.errors.name) {
+            this.ShowPopUp = true;
+        }
     }
 }
 </script>

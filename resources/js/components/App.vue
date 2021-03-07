@@ -11,12 +11,12 @@
             <a class="navbar-logo" href=""><img src="https://html5book.ru/wp-content/uploads/2017/04/lily-logo.png"></a>
         </nav>
         <div class="container">
-            <router-view></router-view>
+            <router-view :errors="errors"></router-view>
         </div>
     </div>
 </template>
 <script>
 export default {
-    props: ['user']
+    props: ['user', 'errors']
 }
 </script>

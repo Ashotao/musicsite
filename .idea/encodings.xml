@@ -12,6 +12,7 @@
     <file url="file://$PROJECT_DIR$/app/Models/Song.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Models/User.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Rules/CorrectLink.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config/auth.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2021_02_25_150952_create_songs_table.php" charset="UTF-8" />

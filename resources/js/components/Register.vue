@@ -3,42 +3,15 @@
         <form class="form" method="post" action="/auth/register">
             <h1>Registration</h1>
             <input type="hidden" name="_token" :value="csrf">
-            <div class="input-form">
-                <input :class="{'error-input': !$v.form.nickname.maxLength}"
-                       @blur="$v.form.nickname.$touch()" v-model="form.nickname"
-                       type="text" placeholder="Nickname" id="nickname" name="nickname">
-                <div class="error" v-if="!$v.form.nickname.maxLength">Nickname is too long (maximum is 25 characters).</div>
+            <div class="input-form" v-for="(fieldValue,fieldName) in $v.form" v-if="fieldName.indexOf('$') == -1">
+                <input :class="{ 'error-input' : isFieldHasErrors(fieldValue)}"
+                       @blur="fieldValue.$touch()" v-model="form[fieldName]"
+                       type="text" :placeholder="fieldName.replace('_', ' ')" :id="fieldName" :name="fieldName">
+
+                <div v-for="(val,valName) in fieldValue" v-if="valName.indexOf('$') == -1 && fieldValue.$dirty" class="error" v-html="errorsLogOut(valName,val,fieldValue,fieldName)">Required field</div>
             </div>
             <div class="input-form">
-                <input :class="{ 'error-input': ($v.form.login.$dirty && !$v.form.login.required) || !$v.form.login.minLength}"
-                       @blur="$v.form.login.$touch()" v-model="form.login"
-                       type="text" placeholder="Login" id="login" name="login">
-                <div class="error" v-if="$v.form.login.$dirty && !$v.form.login.required">Required field</div>
-                <div class="error" v-if="!$v.form.login.minLength">Login must be at least 3 characters</div>
-            </div>
-            <div class="input-form">
-                <input :class="{ 'error-input': ($v.form.email.$dirty && !$v.form.email.required) || !$v.form.email.email}"
-                       @blur="$v.form.email.$touch()" v-model="form.email"
-                       type="text" placeholder="E-mail" id="email" name="email">
-                <div class="error" v-if="$v.form.email.$dirty && !$v.form.email.required">Required field</div>
-                <div class="error" v-if="!$v.form.email.email">Email is invalid</div>
-            </div>
-            <div class="input-form">
-                <input :class="{ 'error-input': ($v.form.password.$dirty && !$v.form.password.required) || !$v.form.password.minLength}"
-                       @blur="$v.form.password.$touch()" v-model="form.password"
-                       type="password" placeholder="Password" id="password" name="password">
-                <div class="error" v-if="$v.form.password.$dirty && !$v.form.password.required">Required field</div>
-                <div class="error" v-if="!$v.form.password.minLength">Password must be at least 3 characters</div>
-            </div>
-            <div class="input-form">
-                <input :class="{ 'error-input': ($v.form.confirm_password.$dirty && !$v.form.password.required) || ($v.form.confirm_password.$dirty && !$v.form.confirm_password.sameAsPass)}"
-                       @blur="$v.form.confirm_password.$touch()" v-model="form.confirm_password"
-                       type="password" placeholder="Confirm password" id="confirm_password" name="confirm_password">
-                <div class="error" v-if="$v.form.confirm_password.$dirty && !$v.form.password.required">Required field</div>
-                <div class="error" v-if="$v.form.confirm_password.$dirty && !$v.form.confirm_password.sameAsPass">The password and confirm password fields do not match</div>
-            </div>
-            <div class="input-form">
-                <input :disabled="!isFormValidated()" type="submit" value="Register">
+                <input :disabled="$v.$invalid" type="submit" value="Register">
             </div>
         </form>
     </div>
@@ -49,12 +22,15 @@ import { required, maxLength, sameAs, minLength, email } from 'vuelidate/lib/val
 
 export default {
     methods: {
-        isFormValidated() {
-            if (this.$v.$invalid === true) {
-                return false;
-            } else {
-                return true;
-            }
+        isFieldHasErrors(field) {
+           return field.$dirty && field.$error;
+        },
+        errorsLogOut(valName,val,fieldValue,valueName,fieldName) {
+            if (valName == 'email' && !val) return 'Email is invalid';
+            if (valName == 'sameAsPass' && !val) return 'The password and confirm password fields do not match'
+            if (valName == 'required' && !val) return 'Required field';
+            if (valName == 'minLength' && !val) return `${fieldName} must be at least ${fieldValue.$params.minLength.min} characters`;
+            if (valName == 'maxLength' && !val) return `${fieldName} is too long (maximum is ${fieldValue.$params.maxLength.max} characters)`;
         }
     },
     data() {

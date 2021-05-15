@@ -8,7 +8,7 @@
                 <li :class="{'activeTop': $route.path == '/auth/login'}" class="right-item icon-login" v-if="!user"> <router-link class="menu-icon" :to="{ name: 'login' }"><svg viewBox="-1 -1 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M12,9H8H4c-2.209,0-4,1.791-4,4v3h16v-3C16,10.791,14.209,9,12,9z"/><path d="M12,5V4c0-2.209-1.791-4-4-4S4,1.791,4,4v1c0,2.209,1.791,4,4,4S12,7.209,12,5z"/></svg></router-link> </li>
                 <li :class="{'activeTop': $route.path == '/auth/register'}" class="right-item icon-register" v-if="!user"> <router-link class="menu-icon" :to="{ name: 'register' }"><svg viewBox="1 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9,2C5.1,2,2,5.1,2,9c0,3.9,3.1,7,7,7c3.9,0,7-3.1,7-7C16,5.1,12.9,2,9,2z M7.5,10C6.1,10,5,8.9,5,7.5C5,6.1,6.1,5,7.5,5  C8.9,5,10,6.1,10,7.5C10,8.9,8.9,10,7.5,10z"/><path d="M15,11l-4,4l2,2v0h2v2l0,0h2v2l0.7,0.7c0.2,0.2,0.4,0.3,0.7,0.3H21c0.6,0,1-0.4,1-1v-2.6c0-0.3-0.1-0.5-0.3-0.7L15,11z"/></svg></router-link> </li>
             </ul>
-            <a class="navbar-logo" href=""><img src="https://html5book.ru/wp-content/uploads/2017/04/lily-logo.png"></a>
+            <a class="navbar-logo" href=""><img src="/images/logo.png"></a>
         </nav>
         <div class="container">
             <router-view :errors="errors"></router-view>

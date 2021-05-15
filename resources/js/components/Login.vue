@@ -3,22 +3,15 @@
         <form class="form" method="post" action="/auth/login">
             <h1>Authorization</h1>
             <input type="hidden" name="_token" :value="csrf">
-            <div class="input-form">
-                <input :class="{ 'error-input': ($v.form.login.$dirty && !$v.form.login.required) || !$v.form.login.minLength}"
-                       @blur="$v.form.login.$touch()" v-model="form.login"
-                       type="text" placeholder="Login" id="login" name="login">
-                <div class="error" v-if="$v.form.login.$dirty && !$v.form.login.required">Required field</div>
-                <div class="error" v-if="!$v.form.login.minLength">Login must be at least 3 characters</div>
+            <div class="input-form" v-for="(fieldValue,fieldName) in $v.form" v-if="fieldName.indexOf('$') == -1">
+                <input :class="{ 'error-input' : isFieldHasErrors(fieldValue)}"
+                       @blur="fieldValue.$touch()" v-model="form[fieldName]"
+                       type="text" :placeholder="fieldName" :id="fieldName" :name="fieldName">
+
+                <div v-for="(val,valName) in fieldValue" v-if="valName.indexOf('$') == -1 && fieldValue.$dirty" class="error" v-html="errorsLogOut(valName,val,fieldValue,fieldName)">Required field</div>
             </div>
             <div class="input-form">
-                <input :class="{ 'error-input': ($v.form.password.$dirty && !$v.form.password.required) || !$v.form.password.minLength}"
-                       @blur="$v.form.password.$touch()" v-model="form.password"
-                       type="password" placeholder="Password" id="password" name="password">
-                <div class="error" v-if="$v.form.password.$dirty && !$v.form.password.required">Required field</div>
-                <div class="error" v-if="!$v.form.password.minLength">Password must be at least 6 characters</div>
-            </div>
-            <div class="input-form">
-                <input :disabled="!isFormValidated()" type="submit" value="Sign in">
+                <input :disabled="$v.$invalid" type="submit" value="Sign in">
             </div>
         </form>
     </div>
@@ -29,12 +22,14 @@
 
     export default {
         methods: {
-            isFormValidated() {
-                if (this.$v.$invalid === true) {
-                    return false;
-                } else {
+            isFieldHasErrors(field) {
+                if (field.$dirty && field.$error) {
                     return true;
                 }
+            },
+            errorsLogOut(valName,val,fieldValue,fieldName) {
+               if (valName == 'required' && !val) return 'Required field';
+               if (valName == 'minLength' && !val) return `${fieldName} must be at least ${fieldValue.$params.minLength.min} characters`;
             }
         },
         data() {
@@ -43,7 +38,7 @@
                 form: {
                     login: '',
                     password: '',
-                }
+                },
             }
         },
         validations: {

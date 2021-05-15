@@ -4,7 +4,7 @@
             <li><svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><path d="M179.199,38.399c0,1.637-0.625,3.274-1.875,4.524l-85.076,85.075l85.076,85.075c2.5,2.5,2.5,6.55,0,9.05s-6.55,2.5-9.05,0  l-89.601-89.6c-2.5-2.5-2.5-6.551,0-9.051l89.601-89.6c2.5-2.5,6.55-2.5,9.05,0C178.574,35.124,179.199,36.762,179.199,38.399z"/></svg></li>
             <li v-on:click="playSong()"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g><path d="M144,124.9L353.8,256L144,387.1V124.9 M128,96v320l256-160L128,96L128,96z"/></g></svg></li>
             <li><svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><path d="M76.8,217.6c0-1.637,0.625-3.274,1.875-4.524L163.75,128L78.675,42.925c-2.5-2.5-2.5-6.55,0-9.05s6.55-2.5,9.05,0  l89.601,89.6c2.5,2.5,2.5,6.551,0,9.051l-89.601,89.6c-2.5,2.5-6.55,2.5-9.05,0C77.425,220.875,76.8,219.237,76.8,217.6z"/></svg></li>
-            <input v-model="currentVolume" @input="setVolume(currentVolume)" type="range" min="0" max="100" step="1">
+            <input v-model="currentVolume" @input="setVolume()" type="range" min="0" max="100" step="1">
         </ul>
         <div class="song-main">
             <ul class="song-menu">
